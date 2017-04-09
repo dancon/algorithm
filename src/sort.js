@@ -30,6 +30,44 @@ function buttle(arr){
   return result;
 }
 
+// 快速排序
+function devision(arr, left, right){
+  // 设置一个基数
+  var baseNum = arr[left];
+
+  while(left < right){
+    while(left < right && arr[right] >= baseNum){
+      right --;
+    }
+
+    arr[left] = arr[right];
+
+    while(left < right && arr[left] <= baseNum){
+      left ++;
+    }
+
+    arr[right] = arr[left];
+  }
+
+  arr[left] = baseNum;
+
+  return left;
+}
+
+function quick(arr, left, right){
+  var result = [].concat(arr), index;
+  if(left < right){
+    index = devision(result, left, right);
+
+    quick(result, left, index -1);
+    quick(result, index + 1, right);
+  }
+
+  return result;
+}
+
 var tempArr = getRandom();
 console.log('未排序前：', tempArr);
 console.log('冒泡排序：', buttle(tempArr));
+console.log('未排序前：', tempArr);
+console.log('快速排序：', quick(tempArr, 0, tempArr.length - 1));
